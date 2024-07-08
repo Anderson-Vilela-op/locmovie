@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("locmovie")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d5a0a858a36179f699021d9d486f3c7814fc6a91")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9fafa59747295e5c838d5f31c533a8b75d8342e6")]
 [assembly: System.Reflection.AssemblyProductAttribute("locmovie")]
 [assembly: System.Reflection.AssemblyTitleAttribute("locmovie")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

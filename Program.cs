@@ -7,7 +7,10 @@ using locmovie.Repositories;
 using locmovie.Services;
 using locmovie.Utils;
 using Microsoft.Extensions.Logging;
-
+using locmovie.Repositories.MovieRepository;
+using locmovie.Services.MovieService;
+using locmovie.Repositories.RentalRepository;
+using locmovie.Services.RentalService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +27,29 @@ builder.Services.AddSwaggerGen(c =>
         Title = "My API",
         Version = "v1"
     });
+    c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+    c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
 });
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -31,6 +57,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IRentalRepository, RentalRepository>();
+builder.Services.AddScoped<IRentalService, RentalService>();
 builder.Services.AddSingleton<ITokenUtils>(new TokenUtils("uGeJGnRhXsUyJhBVkB1zBpGt6mMfVKoR"));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -42,8 +72,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = "locmovie.com",
-            ValidAudience = "locmovie.com",
+            ValidIssuer = "localhost",
+            ValidAudience = "localhost",
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("uGeJGnRhXsUyJhBVkB1zBpGt6mMfVKoR"))
         };
     });

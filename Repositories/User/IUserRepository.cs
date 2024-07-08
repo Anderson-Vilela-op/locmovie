@@ -7,5 +7,7 @@ namespace locmovie.Repositories
     {
         Task<User?> GetUserByEmailAsync(string email);
         Task AddUserAsync(User user);
+        Task<User?> GetUserByIdAsync(int id);
+
     }
 }

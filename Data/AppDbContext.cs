@@ -1,4 +1,6 @@
 using locmovie.Models;
+using locmovie.Models.MovieModel;
+using locmovie.Models.RentalModel;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -11,5 +13,7 @@ namespace locmovie.Data
         {}
 
         public DbSet<User> Users {get;set;}
+        public DbSet<Movie> Movies {get;set;}
+        public DbSet<Rental> Rentals {get;set;}
     }
 }

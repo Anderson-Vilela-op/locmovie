@@ -21,8 +21,8 @@ namespace locmovie.Utils
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                issuer: "locmovies.com",
-                audience: "locmovies.com",
+                issuer: "localhost",
+                audience: "localhost",
                 claims: claims,
                 expires: DateTime.Now.AddHours(1),
                 signingCredentials: creds);
